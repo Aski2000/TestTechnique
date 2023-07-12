@@ -7,7 +7,6 @@ const addProduct = async (req, res) => {
     let product = new Product(
       req.body.name,
       req.body.type,
-      req.body.phone,
       req.body.price,
       req.body.rating,
       req.body.warranty_years,
@@ -65,7 +64,6 @@ const updateProduct = async (req, res) => {
     let id = new ObjectID(req.params.id);
     let name = req.body.name;
     let type = req.body.type;
-    let phone = req.body.phone;
     let price = req.body.price;
     let rating = req.body.rating;
     let warranty_years = req.body.warranty_years;
@@ -73,7 +71,7 @@ const updateProduct = async (req, res) => {
     let result = await client
       .db()
       .collection("products")
-      .updateOne({ _id: id }, { $set: { name, type, phone, price, rating, warranty_years, available } });
+      .updateOne({ _id: id }, { $set: { name, type, price, rating, warranty_years, available } });
 
     if (result.modifiedCount === 1) {
       res.status(200).json({ msg: "Modification réussie" });
